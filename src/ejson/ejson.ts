@@ -12,7 +12,7 @@ function interactivity() {
         ejsonToJsonButton.onclick = async () => {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
-            dst.value = JSON.stringify(EJSON.parse(src.value))
+            dst.value = JSON.stringify(eval(src.value))
         }
     }
 
@@ -21,7 +21,7 @@ function interactivity() {
         jsonToEjsonButton.onclick = async () => {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
-            dst.value = EJSON.stringify(JSON.parse(src.value))
+            dst.value = EJSON.deserialize(JSON.parse(src.value))
         }
     }
 }
