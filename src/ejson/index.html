@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eson to Json</title>
+    <link rel="stylesheet" href="../index.css">
+    <script type="module" src="ejson.ts"></script>
+</head>
+<body class="p-2">
+<header>
+    <include src="src/header.html"></include>
+</header>
+<label class="flex flex-col">
+    Input your source
+    <textarea class="border-2 border-gray-400 font-mono text-sm" rows="15" id="src"></textarea>
+</label>
+<button class="bg-gray-400 border-gray-600 border-2 rounded-sm p-2" id="ejson-to-json">EJSON to JSON</button>
+<button class="bg-gray-400 border-gray-600 border-2 rounded-sm p-2" id="json-to-ejson">JSON to EJSON</button>
+<label class="flex flex-col">
+    Destination
+    <textarea class="border-2 border-gray-400 font-mono text-sm" rows="15" id="dst" disabled></textarea>
+</label>
+</body>
+</html>
