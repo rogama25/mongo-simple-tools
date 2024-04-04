@@ -6,7 +6,15 @@ if (document.readyState !== "loading") {
     document.addEventListener("DOMContentLoaded", interactivity)
 }
 
-function replacer(key: string) {
+function replacer(key: string, obj: any) {
+    if (obj.hasOwnProperty("$oid")) {
+        return `ObjectId("${obj.$oid}")`
+    }
+    return obj
+}
+
+function replacerAfter(_match: string, p1: string) {
+    return `ObjectId("${p1}")`
 }
 
 function interactivity() {
@@ -25,18 +33,8 @@ function interactivity() {
         jsonToEjsonButton.onclick = async () => {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
-            const parsed = EJSON.parse(src.value)
-            const result = {
-                ...parsed,
-                toJSON(key: string) {
-                    const obj = this.key
-                    if (obj instanceof ObjectId) {
-                        return `ObjectId("${obj.toHexString()}")`
-                    }
-                    return obj
-                }
-            }
-            dst.value = JSON.stringify(result)
+            const result = EJSON.stringify(EJSON.parse(src.value), replacer)
+            dst.value = result.replaceAll(/"ObjectId\(\\"([a-f\d]{24})\\"\)/gi, replacerAfter)
         }
     }
 }
