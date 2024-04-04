@@ -34,7 +34,7 @@ function interactivity() {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
             const result = EJSON.stringify(EJSON.parse(src.value), replacer)
-            dst.value = result.replaceAll(/"ObjectId\(\\"([a-f\d]{24})\\"\)/gi, replacerAfter)
+            dst.value = result.replaceAll(/"ObjectId\(\\"([a-f\d]{24})\\"\)"/gi, replacerAfter)
         }
     }
 }
