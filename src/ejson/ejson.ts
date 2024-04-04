@@ -6,11 +6,7 @@ if (document.readyState !== "loading") {
     document.addEventListener("DOMContentLoaded", interactivity)
 }
 
-function replacer(key: string, obj: any) {
-    if (obj instanceof ObjectId) {
-        return `ObjectId("${obj.toHexString()}")`
-    }
-    return obj
+function replacer(key: string) {
 }
 
 function interactivity() {
@@ -30,8 +26,17 @@ function interactivity() {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
             const parsed = EJSON.parse(src.value)
-            parsed.toJSON = replacer
-            dst.value = JSON.stringify(parsed)
+            const result = {
+                ...parsed,
+                toJSON(key: string) {
+                    const obj = this.key
+                    if (obj instanceof ObjectId) {
+                        return `ObjectId("${obj.toHexString()}")`
+                    }
+                    return obj
+                }
+            }
+            dst.value = JSON.stringify(result)
         }
     }
 }
