@@ -12,7 +12,7 @@ function interactivity() {
         ejsonToJsonButton.onclick = async () => {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
-            dst.value = JSON.stringify(eval(src.value))
+            dst.value = JSON.stringify(eval(`import {ObjectId} from "bson"; (${src.value})`))
         }
     }
 
