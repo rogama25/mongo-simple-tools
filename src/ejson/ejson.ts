@@ -8,7 +8,7 @@ if (document.readyState !== "loading") {
 
 function replacer(key: string, obj: any) {
     if (obj instanceof ObjectId) {
-        return `ObjectId(${obj.toHexString()})`
+        return `ObjectId("${obj.toHexString()}")`
     }
     return obj
 }
@@ -19,8 +19,8 @@ function interactivity() {
         ejsonToJsonButton.onclick = async () => {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
-            const string = src.value.replaceAll('ObjectId("', 'new ObjectId("')
-            dst.value = JSON.stringify(eval(`(${src.value})`))
+            const myString = src.value.replaceAll('ObjectId("', 'new ObjectId("')
+            dst.value = JSON.stringify(eval(`(${myString})`))
         }
     }
 
@@ -29,7 +29,7 @@ function interactivity() {
         jsonToEjsonButton.onclick = async () => {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
-            dst.value = JSON.stringify(JSON.parse(src.value), replacer)
+            dst.value = JSON.stringify(EJSON.parse(src.value), replacer)
         }
     }
 }
