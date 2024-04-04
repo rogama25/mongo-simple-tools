@@ -29,7 +29,7 @@ function interactivity() {
         jsonToEjsonButton.onclick = async () => {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
-            dst.value = EJSON.deserialize(JSON.parse(src.value))
+            dst.value = JSON.stringify(JSON.parse(src.value), replacer)
         }
     }
 }
