@@ -30,7 +30,8 @@ function interactivity() {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
             const parsed = EJSON.parse(src.value)
-            dst.value = JSON.stringify(parsed, replacer)
+            parsed.toJSON = replacer
+            dst.value = JSON.stringify(parsed)
         }
     }
 }
