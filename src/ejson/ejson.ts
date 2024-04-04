@@ -6,12 +6,20 @@ if (document.readyState !== "loading") {
     document.addEventListener("DOMContentLoaded", interactivity)
 }
 
+function replacer(key: string, obj: any) {
+    if (obj instanceof ObjectId) {
+        return `ObjectId(${obj.toHexString()})`
+    }
+    return obj
+}
+
 function interactivity() {
     const ejsonToJsonButton = document.getElementById("ejson-to-json");
     if (ejsonToJsonButton) {
         ejsonToJsonButton.onclick = async () => {
             const src = document.getElementById("src") as HTMLTextAreaElement;
             const dst = document.getElementById("dst") as HTMLTextAreaElement;
+            const string = src.value.replaceAll('ObjectId("', 'new ObjectId("')
             dst.value = JSON.stringify(eval(`(${src.value})`))
         }
     }
