@@ -21,6 +21,7 @@ export default defineConfig({
                 ejson: resolve(__dirname, 'src/ejson/index.html'),
             },
         },
+        outDir: "../dist"
     },
     base: "/"
 });
